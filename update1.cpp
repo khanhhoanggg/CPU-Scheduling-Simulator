@@ -29,7 +29,6 @@ struct Process {
           remainingBurst(b), queueLevel(0), lastRunTime(a) {}
 };
 
-// Hàm đọc dữ liệu từ file (Không thay đổi)
 vector<Process> readProcesses(const string& filename) {
     vector<Process> processes;
     ifstream file(filename);    
@@ -57,7 +56,7 @@ vector<Process> readProcesses(const string& filename) {
     return processes;
 }
 
-// Tính toán các chỉ số trung bình (Không thay đổi)
+
 pair<double, double> calculateAverages(const vector<Process>& processes) {
     if (processes.empty()) return {0.0, 0.0};
     double totalWaiting = 0, totalTurnaround = 0;
@@ -68,7 +67,6 @@ pair<double, double> calculateAverages(const vector<Process>& processes) {
     return {totalWaiting / processes.size(), totalTurnaround / processes.size()};
 }
 
-// In kết quả (Không thay đổi)
 void printResults(const string& algorithmName, vector<Process>& processes, bool showPriority = false, bool showQueue = false) {
     // Sắp xếp lại theo Process ID để dễ xem
     sort(processes.begin(), processes.end(), 
@@ -129,7 +127,6 @@ void printResults(const string& algorithmName, vector<Process>& processes, bool 
          << fixed << setprecision(2) << avgTurnaround << endl;
 }
 
-// FCFS (Không thay đổi)
 vector<Process> fcfs(vector<Process> processes) {
     sort(processes.begin(), processes.end(), 
          [](const Process& a, const Process& b) { return a.arrival < b.arrival; });
@@ -146,7 +143,6 @@ vector<Process> fcfs(vector<Process> processes) {
     return processes;
 }
 
-// SJF (Non-preemptive) (Không thay đổi)
 vector<Process> sjf(vector<Process> processes) {
     vector<Process> result;
     vector<bool> completed(processes.size(), false);
@@ -190,7 +186,6 @@ vector<Process> sjf(vector<Process> processes) {
     return result;
 }
 
-// Priority (Non-preemptive) (Không thay đổi)
 vector<Process> priorityScheduling(vector<Process> processes) {
     vector<Process> result;
     vector<bool> completed(processes.size(), false);
@@ -235,7 +230,6 @@ vector<Process> priorityScheduling(vector<Process> processes) {
     return result;
 }
 
-// THUẬT TOÁN ROUND ROBIN ĐÃ SỬA
 vector<Process> roundRobin(vector<Process> processes, int quantum) {
     vector<Process> procs = processes;
     queue<int> readyQueue;
@@ -327,7 +321,6 @@ vector<Process> roundRobin(vector<Process> processes, int quantum) {
     return result;
 }
 
-// THUẬT TOÁN MLQ ĐÃ SỬA
 // Queue 0: Priority cao (FCFS)
 // Queue 1: Priority trung bình (Round Robin q=2)
 // Queue 2: Priority thấp (Round Robin q=4)
@@ -417,7 +410,6 @@ vector<Process> mlq(vector<Process> processes) {
     return result;
 }
 
-// THUẬT TOÁN MLFQ ĐÃ SỬA
 vector<Process> mlfq(vector<Process> processes) {
     // MLFQ là Preemptive giữa các Queue: Q0 > Q1 > Q2
     vector<Process> procs = processes;
@@ -521,7 +513,6 @@ vector<Process> mlfq(vector<Process> processes) {
     return result;
 }
 
-// Ghi kết quả ra file (Không thay đổi)
 void writeResultsToFile(const string& filename, 
                         const vector<Process>& fcfsResult,
                         const vector<Process>& sjfResult,
@@ -638,7 +629,6 @@ void writeResultsToFile(const string& filename,
     cout << "\n==> Da ghi ket qua vao file: " << filename << endl;
 }
 
-// So sánh các thuật toán (Không thay đổi)
 void compareAlgorithms(const vector<Process>& fcfsResult,
                        const vector<Process>& sjfResult,
                        const vector<Process>& priorityResult,
@@ -735,4 +725,5 @@ int main() {
                        quantum);
     cout<<"da ghi ket qua thanh cong vao file output1.txt"<<endl;
     return 0;
+
 }
